@@ -4,7 +4,24 @@ from . import models
 
 @admin.register(models.User)
 class CustomUserAdmin(admin.ModelAdmin):
-    pass
+    """Custom user admin"""
+
+    list_display = (
+        "username",
+        "avatar",
+        "gender",
+        "bio",
+        "birthdate",
+        "language",
+        "currency",
+        "superhost",
+        "email",
+        "first_name",
+        "last_name",
+        "date_joined",
+    )
+
+    list_filter = ("language",)
 
 
-# Register your models here.
+""" above things are same with this => admin.site.register(models.User, CustomUserAdmin)"""
