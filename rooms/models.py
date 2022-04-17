@@ -6,6 +6,23 @@ from users import models as user_models
 # Create your models here.
 
 
+class AbstractItem(core_models.TimeStampedModel):
+
+    """Abstract item"""
+
+    name = models.CharField(max_length=80)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class RoomType(AbstractItem):
+    pass
+
+
 class Room(core_models.TimeStampedModel):
 
     """Room model definition"""
@@ -24,3 +41,7 @@ class Room(core_models.TimeStampedModel):
     check_out = models.TimeField()
     instant_book = models.BooleanField(default=False)
     host = models.ForeignKey(user_models.User, on_delete=models.CASCADE)
+    roomtype = models.ManyToManyField(RoomType, blank=True)
+
+    def __str__(self):
+        return self.name
