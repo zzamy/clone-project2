@@ -22,25 +22,28 @@ class AbstractItem(core_models.TimeStampedModel):
 class RoomType(AbstractItem):
     """Room-type model definition"""
 
-    pass
+    class Meta:
+        verbose_name = "Room type"
+        ordering = ["created"]
 
 
 class Facility(AbstractItem):
-    """Facility model definition"""
-
-    pass
+    class Meta:
+        verbose_name_plural = "Facilities"
 
 
 class Amenity(AbstractItem):
     """Amenity model definition"""
 
-    pass
+    class Meta:
+        verbose_name_plural = "Amenities"
 
 
 class HouseRule(AbstractItem):
     """House Rules model definition"""
 
-    pass
+    class Meta:
+        verbose_name = "House Rule"
 
 
 class Room(core_models.TimeStampedModel):
@@ -68,3 +71,13 @@ class Room(core_models.TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+
+class Photo(core_models.TimeStampedModel):
+    caption = models.CharField(max_length=80)
+    photo = models.ImageField()
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    # Room 에서 CASCADE 의미 : 해당 룸 삭제시 불러온 사진이 지워져야함
+
+    def __str__(self):
+        return self.caption
