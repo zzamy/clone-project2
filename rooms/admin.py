@@ -64,6 +64,9 @@ class RoomAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+    ordering = ("name", "price")
+
     list_display = (
         "name",
         "country",
