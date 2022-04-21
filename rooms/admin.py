@@ -17,6 +17,53 @@ class RoomAdmin(admin.ModelAdmin):
 
     """Room Admin Difinition"""
 
+    fieldsets = (
+        (
+            "Basic Info",
+            {
+                "fields": (
+                    "name",
+                    "description",
+                    "country",
+                    "adress",
+                    "price",
+                )
+            },
+        ),
+        (
+            "Times",
+            {
+                "fields": ("check_in", "check_out", "instant_book"),
+            },
+        ),
+        (
+            "Space",
+            {
+                "fields": (
+                    "bed",
+                    "bedrooms",
+                    "baths",
+                )
+            },
+        ),
+        (
+            "More About The Space",
+            {
+                "classes": ("collapse",),
+                "fields": (
+                    "amenities",
+                    "facilities",
+                    "house_rules",
+                ),
+            },
+        ),
+        (
+            "Last Details",
+            {
+                "fields": ("host",),
+            },
+        ),
+    )
     list_display = (
         "name",
         "country",
@@ -33,8 +80,18 @@ class RoomAdmin(admin.ModelAdmin):
 
     list_filter = (
         "instant_book",
+        "roomtype",
+        "amenities",
+        "facilities",
+        "house_rules",
         "city",
         "country",
+    )
+
+    filter_horizontal = (
+        "amenities",
+        "facilities",
+        "house_rules",
     )
 
     search_fields = ("=city", "host__username")
