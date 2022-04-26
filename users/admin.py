@@ -9,6 +9,25 @@ class CustomUserAdmin(UserAdmin):
         ("Banana", {"fields": ("avatar", "gender", "bio")}),
     )
 
+    list_display = (
+        "username",
+        "avatar",
+        "gender",
+        "bio",
+        "birthdate",
+        "language",
+        "currency",
+        "superhost",
+        "is_staff",
+        "is_superuser",
+        "email",
+        "first_name",
+        "last_name",
+        "date_joined",
+    )
+
+    list_filter = UserAdmin.list_filter + ("superhost",)
+
 
 '''
 @admin.register(models.User)
